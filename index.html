@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vimoksha — Clarity, Letters & Life Navigation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg: #111215;
+      --surface: #181a20;
+      --surface-hover: #1f222a;
+      --border: #262933;
+      --text: #f0f2f5;
+      --text-muted: #9ca3af;
+      --accent: #93c5fd;
+      
+      /* Private Sanctuary Palette: Charcoal Blush & Soft Botanicals */
+      --vault-bg: #1a161d;
+      --vault-surface: #231d27;
+      --vault-surface-hover: #2c2532;
+      --vault-border: #382e3f;
+      --vault-rose: #e8b4b8;
+      --vault-lavender: #d4c5e2;
+      --vault-sage: #b2c9bb;
+      --vault-text: #f9f5f8;
+      --vault-subtext: #b8acbe;
+
+      --font-body: 'Plus Jakarta Sans', -apple-system, sans-serif;
+      --font-editorial: 'Newsreader', Georgia, serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font-body);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Minimal Floating Navigation */
+    header {
+      position: sticky;
+      top: 0;
+      background: rgba(17, 18, 21, 0.85);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 1.8rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+    }
+
+    .brand {
+      font-size: 1.15rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    nav {
+      display: flex;
+      gap: 1.4rem;
+    }
+
+    nav a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.86rem;
+      font-weight: 400;
+      transition: color 0.2s ease;
+    }
+
+    nav a:hover {
+      color: var(--text);
+    }
+
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 3rem 1.4rem;
+    }
+
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      padding: 4.5rem 1rem 3.5rem;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: rgba(147, 197, 253, 0.08);
+      border: 1px solid rgba(147, 197, 253, 0.2);
+      padding: 0.35rem 0.8rem;
+      border-radius: 100px;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 {
+      font-family: var(--font-editorial);
+      font-size: 2.8rem;
+      font-weight: 400;
+      letter-spacing: -0.01em;
+      line-height: 1.25;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero p {
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      max-width: 580px;
+      margin: 0 auto 2.2rem;
+      font-weight: 300;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.8rem 1.6rem;
+      background: var(--text);
+      color: var(--bg);
+      font-weight: 500;
+      font-size: 0.88rem;
+      border-radius: 8px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+
+    .btn:hover {
+      opacity: 0.9;
+    }
+
+    /* Structural Headings */
+    .section-title {
+      font-family: var(--font-editorial);
+      font-size: 1.85rem;
+      font-weight: 400;
+      margin-bottom: 0.4rem;
+    }
+
+    .section-desc {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      margin-bottom: 1.8rem;
+      font-weight: 300;
+    }
+
+    /* Library Cards */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.2rem;
+      margin-bottom: 4rem;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: border-color 0.2s;
+    }
+
+    .card:hover {
+      border-color: #3b4050;
+    }
+
+    .card-meta {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .card h3 {
+      font-size: 1.15rem;
+      font-weight: 500;
+      margin-bottom: 0.5rem;
+    }
+
+    .card p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+      margin-bottom: 1.4rem;
+    }
+
+    .card .download-btn {
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.84rem;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    /* Consultation Form */
+    .form-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 2rem;
+      margin-bottom: 4.5rem;
+    }
+
+    .form-row {
+      margin-bottom: 1.3rem;
+    }
+
+    .form-row label {
+      display: block;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-bottom: 0.4rem;
+      letter-spacing: 0.04em;
+    }
+
+    .form-row input,
+    .form-row select,
+    .form-row textarea {
+      width: 100%;
+      padding: 0.8rem 0.9rem;
+      background: #111215;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .form-row input:focus,
+    .form-row select:focus,
+    .form-row textarea:focus {
+      border-color: var(--accent);
+    }
+
+    /* PRIVATE VAULT — Calming Aesthetic Pastel Environment */
+    .vault {
+      background: radial-gradient(circle at 80% 20%, rgba(232, 180, 184, 0.08) 0%, transparent 60%),
+                  radial-gradient(circle at 10% 80%, rgba(178, 201, 187, 0.06) 0%, transparent 60%),
+                  var(--vault-bg);
+      border: 1px solid var(--vault-border);
+      border-radius: 18px;
+      padding: 2.6rem 2rem;
+      margin-bottom: 4rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    }
+
+    .vault-tag {
+      display: inline-block;
+      font-size: 0.72rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--vault-rose);
+      background: rgba(232, 180, 184, 0.12);
+      border: 1px solid rgba(232, 180, 184, 0.25);
+      padding: 0.3rem 0.75rem;
+      border-radius: 100px;
+      margin-bottom: 1rem;
+    }
+
+    .vault-heading {
+      font-family: var(--font-editorial);
+      font-size: 2.1rem;
+      font-weight: 400;
+      color: var(--vault-text);
+      margin-bottom: 0.4rem;
+    }
+
+    .vault-lead {
+      color: var(--vault-subtext);
+      font-size: 0.95rem;
+      max-width: 520px;
+      font-weight: 300;
+      margin-bottom: 1.8rem;
+    }
+
+    .vault-auth-box {
+      display: flex;
+      gap: 0.7rem;
+      max-width: 420px;
+    }
+
+    .vault-auth-box input {
+      flex: 1;
+      padding: 0.8rem 1rem;
+      background: var(--vault-surface);
+      border: 1px solid var(--vault-border);
+      border-radius: 8px;
+      color: var(--vault-text);
+      font-size: 0.9rem;
+      outline: none;
+    }
+
+    .vault-auth-box input:focus {
+      border-color: var(--vault-rose);
+    }
+
+    .vault-btn {
+      background: var(--vault-rose);
+      color: #1a161d;
+      border: none;
+      padding: 0 1.4rem;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 0.88rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .vault-btn:hover {
+      background: #efc4c7;
+    }
+
+    .vault-articles {
+      display: none;
+      margin-top: 2.2rem;
+      animation: fadeIn 0.4s ease;
+    }
+
+    .vault-card {
+      background: var(--vault-surface);
+      border: 1px solid var(--vault-border);
+      border-radius: 12px;
+      padding: 1.8rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .vault-card h4 {
+      font-family: var(--font-editorial);
+      font-size: 1.4rem;
+      color: var(--vault-rose);
+      font-weight: 400;
+      margin-bottom: 0.4rem;
+    }
+
+    .vault-card-date {
+      font-size: 0.74rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--vault-sage);
+      margin-bottom: 0.8rem;
+      display: block;
+    }
+
+    .vault-card p {
+      color: #ded6e3;
+      font-size: 0.94rem;
+      line-height: 1.7;
+      font-weight: 300;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 2.5rem 1rem;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <a href="#" class="brand">Vimoksha</a>
+    <nav>
+      <a href="#library">Library</a>
+      <a href="#guidance">Guidance</a>
+      <a href="#vault">Sanctuary</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <!-- Hero -->
+    <section class="hero">
+      <span class="hero-badge">A Philosophy of Discernment</span>
+      <h1>Clarity in Thought.<br>Quiet in Character.</h1>
+      <p>A digital haven for intellectual discipline, systematic career focus, and long-form literature.</p>
+      <a href="#library" class="btn">Browse Resources</a>
+    </section>
+
+    <!-- Public Library -->
+    <section id="library">
+      <h2 class="section-title">The Open Archive</h2>
+      <p class="section-desc">Handcrafted guides, mental frameworks, and reading materials.</p>
+      
+      <div class="grid">
+        <div class="card">
+          <div>
+            <span class="card-meta">Philosophy</span>
+            <h3>The Architecture of Composure</h3>
+            <p>Principles of Stoic self-possession during seasons of intense ambition, pressure, and uncertainty.</p>
+          </div>
+          <a href="#" class="download-btn">Download PDF &rarr;</a>
+        </div>
+
+        <div class="card">
+          <div>
+            <span class="card-meta">Career Direction</span>
+            <h3>Exam Disciplines & Focus</h3>
+            <p>Strategic routines for clearing high-stakes examinations without falling prey to mental exhaustion.</p>
+          </div>
+          <a href="#" class="download-btn">Download PDF &rarr;</a>
+        </div>
+
+        <div class="card">
+          <div>
+            <span class="card-meta">Curated Works</span>
+            <h3>Reflections on Classical Statecraft</h3>
+            <p>Key notes on strategic patience, Chanakya's maxims, and deep historical leadership.</p>
+          </div>
+          <a href="#" class="download-btn">Download PDF &rarr;</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Consultation Section -->
+    <section id="guidance">
+      <h2 class="section-title">Personal Inquiries & Guidance</h2>
+      <p class="section-desc">Direct correspondence regarding academic direction, depressive states, or career dilemmas.</p>
+      
+      <div class="form-box">
+        <form id="consultForm" onsubmit="submitForm(event)">
+          <div class="form-row">
+            <label>FULL NAME</label>
+            <input type="text" id="name" required placeholder="Deep Majumdar" />
+          </div>
+          <div class="form-row">
+            <label>EMAIL ADDRESS</label>
+            <input type="email" id="email" required placeholder="contact@domain.com" />
+          </div>
+          <div class="form-row">
+            <label>DOMAIN OF INQUIRY</label>
+            <select id="topic">
+              <option value="career">Public Examination / Career Strategy</option>
+              <option value="burnout">Mental Exhaustion & Overthinking</option>
+              <option value="relationship">Relationships & Emotional Composure</option>
+              <option value="academic">Academic & Degree Transitions</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label>YOUR CONTEXT</label>
+            <textarea id="message" rows="4" required placeholder="Detail your situation clearly..."></textarea>
+          </div>
+          <button type="submit" class="btn">Send Inquiry</button>
+          <p id="formStatus" style="display:none; color: var(--accent); font-size: 0.85rem; margin-top: 1rem;"></p>
+        </form>
+      </div>
+    </section>
+
+    <!-- Aesthetics & Private Vault Section -->
+    <section id="vault" class="vault">
+      <span class="vault-tag">Private Sanctuary</span>
+      <h2 class="vault-heading">Quiet Letters & Reflections</h2>
+      <p class="vault-lead">A calm, aesthetic archive reserved for intimate writings, private letters, and unpublished manuscripts.</p>
+      
+      <div class="vault-auth-box" id="authBox">
+        <input type="password" id="vaultKey" placeholder="Enter private sanctuary passkey" />
+        <button class="vault-btn" onclick="checkVaultAccess()">Unlock</button>
+      </div>
+      <p id="vaultStatus" style="display:none; color: var(--vault-rose); font-size: 0.82rem; margin-top: 0.7rem;"></p>
+
+      <div class="vault-articles" id="vaultArticles">
+        <div class="vault-card">
+          <span class="vault-card-date">Entry • 01</span>
+          <h4>On Distance, Love, and Patience</h4>
+          <p>“Quiet moments in the evening reveal what the day obscures: that enduring devotion is neither loud nor demanding, but a quiet decision repeated day after day...”</p>
+        </div>
+
+        <div class="vault-card">
+          <span class="vault-card-date">Entry • 02</span>
+          <h4>Solitude When the World Moves Fast</h4>
+          <p>“We are not behind. We are simply operating on a different rhythm—one where depth is chosen over immediate applause, and dignity over speed.”</p>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <p>© 2026 Vimoksha. Designed with deliberate simplicity.</p>
+  </footer>
+
+  <script>
+    function submitForm(e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const status = document.getElementById('formStatus');
+      status.style.display = 'block';
+      status.innerText = `Thank you, ${name}. Your note has been registered quietly.`;
+      document.getElementById('consultForm').reset();
+    }
+
+    function checkVaultAccess() {
+      const pass = document.getElementById('vaultKey').value.trim();
+      const status = document.getElementById('vaultStatus');
+      const articles = document.getElementById('vaultArticles');
+      const authBox = document.getElementById('authBox');
+
+      // Set your private password here
+      if (pass === "vimoksha2026" || pass === "deep") {
+        articles.style.display = "block";
+        authBox.style.display = "none";
+        status.style.display = "none";
+      } else {
+        status.style.display = "block";
+        status.innerText = "The passkey does not match. Please verify with Deep.";
+      }
+    }
+  </script>
+</body>
+</html>
